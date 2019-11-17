@@ -39,9 +39,9 @@
               <tr>
                 <form action="/contacts" method="POST">
                   <td><button type="submit" class="form-control">Add</button></td>
-                  <td><input type="text" name="date" class="form-control" id="date-input"></td>
+                  <td><input type="text" name="time" class="form-control" id="date-input"></td>
                   <td><input type="text" name="operator" class="form-control"></td>
-                  <td><input type="text" name="dx_call" class="form-control"></td>
+                  <td><input type="text" name="dxCall" class="form-control"></td>
 
                   <% fields.forEach( field => { %>
                     <td><input type="text" name="contact_fields[<%= field.id %>]" class="form-control" placeholder="<%= field.name %>"></td>
