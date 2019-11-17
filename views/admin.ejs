@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title %></title>
+    <%- include('includes/bootstrap.ejs') %>
+</head>
+<body>
+    <div class="container">
+        <!-- Header / Navigation-->
+        <div class="row">
+          <div class="col">
+            <h1><%= title %></h1>
+          </div>
+        </div>
+        <!-- Main Content -->
+        <div class="row">
+          <div id="fields" class="col">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th> # </th>
+                  <th> Field Name </th>
+                  <th> Type </th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <form action="/field" method="POST">
+                    <td><button type="submit" class="form-control">Add</button></td>
+                    <td><input type="text" name="name" class="form-control"></td>
+                    <td><select name="fieldTypeId" id="field_type" class="form-control">
+                        <% fieldTypes.forEach( type => { %>
+                            <option value="<%= type.id %>"><%= type.desc.toUpperCase() %></option>
+                        <% }); %>
+                    </select></td>
+                    
+                  </form>
+                </tr>
+                <% fields.forEach( field => { %>
+                    <tr>
+                        <td><%= field.id %> </td>
+                        <td><%= field.name %></td>
+                        <td><%= field.FieldType.desc.toUpperCase() %></td>
+                    </tr>
+                <% }); %>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    <%- include('includes/bootstrapJS.ejs'); %>
+</body>
+</html>

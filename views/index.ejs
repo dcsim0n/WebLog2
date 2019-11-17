@@ -2,10 +2,70 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <%- include('includes/bootstrap.ejs') %>
+    <script lang="text/javascript">
+      document.addEventListener('DOMContentLoaded', function( ){
+        setInterval(( )=>{
+          const now = new Date();
+          document.getElementById('date-input').value = now.toUTCString();
+        },1000)
+      })
+    </script>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div class="container">
+      <!-- Header / Navigation-->
+      <div class="row">
+        <div class="col">
+          <h1><%= title %></h1>
+        </div>
+      </div>
+      <!-- Main Content -->
+      <div class="row">
+        <div id="contacts" class="col">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th style="width:16em;">Date - Time</th>
+                <th>Operator</th>
+                <th>DX Call</th>
+                <% fields.forEach( field => { %>
+                  <th><%= field.name %></th>
+                <% }); %>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <form action="/contacts" method="POST">
+                  <td><button type="submit" class="form-control">Add</button></td>
+                  <td><input type="text" name="date" class="form-control" id="date-input"></td>
+                  <td><input type="text" name="operator" class="form-control"></td>
+                  <td><input type="text" name="dx_call" class="form-control"></td>
+
+                  <% fields.forEach( field => { %>
+                    <td><input type="text" name="contact_fields[<%= field.id %>]" class="form-control" placeholder="<%= field.name %>"></td>
+                    
+                  <% }); %>
+                  
+                </form>
+              </tr>
+              <% contacts.forEach( contact => {%> 
+                <tr>
+                  <td><%= contact.id %></td>
+                  <td><%= contact.date %></td>
+                  <td><%= contact.operator %></td>
+                  <td><%= contact.dx_call %></td>
+                  <% contact.contact_fields && contact.contact_fields.forEach( cf => { %>
+                    <td> <%= cf.value %> </td>
+                  <% }); %>
+                </tr>  
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <%- include('includes/bootstrapJS.ejs') %>
   </body>
 </html>
