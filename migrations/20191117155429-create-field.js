@@ -17,7 +17,7 @@ module.exports = {
       order: {
         type: Sequelize.INTEGER
       },
-      feildTypeId:{
+      fieldTypeId:{
         type: Sequelize.INTEGER
       },
       createdAt: {
