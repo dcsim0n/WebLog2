@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   FieldType.associate = function(models) {
     // associations can be defined here
-    FieldType.hasMany( models.Fields );
+    FieldType.hasMany( models.Field );
   };
   return FieldType;
 
