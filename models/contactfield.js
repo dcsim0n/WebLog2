@@ -7,6 +7,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   ContactField.associate = function(models) {
     // associations can be defined here
+    ContactField.belongsTo( models.Field );
+    ContactField.belongsTo( models.Contact );
   };
   return ContactField;
 };

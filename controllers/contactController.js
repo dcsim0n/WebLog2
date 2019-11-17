@@ -12,9 +12,14 @@ exports.allContacts = ( req, res, next ) => {
   db.Field.findAll( {where: {visible: true }})
   .then( f => {
     fields = f;
-    return db.Contact.findAll({include: [ db.ContactField ]});
+    return db.Contact.findAll({
+      include: [ { model: db.ContactField, include: [ db.Field ]} ], 
+      //FIX-ME: ordering is done by Id here, we have an 'order' column that seems to be ignored due to it's name
+      order: [[ db.ContactField, 'FieldId', 'ASC' ]]
+    });
   })
   .then( contacts => {
+    //console.log(contacts[2].ContactFields)
     res.render('index',{
       title: 'Contact Log',
       fields,
@@ -29,7 +34,7 @@ exports.createContact = ( req, res, next ) => {
   console.log('req.body', req.body);
   let contact;
   db.Contact.create( {
-      date: req.body.date,
+      time: req.body.time,
       operator: req.body.operator,
       dxCall: req.body.dxCall,
       ContactFields: Object.keys(contact_fields).map( cf => {

@@ -53,10 +53,10 @@
               <% contacts.forEach( contact => {%> 
                 <tr>
                   <td><%= contact.id %></td>
-                  <td><%= contact.date %></td>
+                  <td><%= contact.time %></td>
                   <td><%= contact.operator %></td>
-                  <td><%= contact.dx_call %></td>
-                  <% contact.contact_fields && contact.contact_fields.forEach( cf => { %>
+                  <td><%= contact.dxCall %></td>
+                  <% contact.ContactFields && contact.ContactFields.forEach( cf => { %>
                     <td> <%= cf.value %> </td>
                   <% }); %>
                 </tr>  
