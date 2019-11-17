@@ -8,6 +8,8 @@ module.exports = (sequelize, DataTypes) => {
   Field.associate = function(models) {
     // associations can be defined here
     Field.belongsTo( models.FieldType );
+    Field.hasMany( models.ContactField );
+    Field.belongsToMany( models.Contact, { through: models.ContactField })
   };
   return Field;
 };
