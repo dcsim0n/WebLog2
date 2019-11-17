@@ -1,9 +1,14 @@
-var express = require('express');
-var router = express.Router();
+/**
+|--------------------------------------------------
+| Index routes 
+| Dana Simmons 2019
+|--------------------------------------------------
+*/
 
+const express = require('express');
+const router = express.Router();
+const contactController = require('../controllers/contactController');
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/', contactController.allContacts );
 
 module.exports = router;

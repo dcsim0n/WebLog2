@@ -21,7 +21,7 @@ exports.adminPage = function(req, res, next) {
   //  return Setting.findAll();
   //})
   //.then( settings =>{
-    console.log('fields[0]', fields[1])
+    console.log('fields', fields)
     res.render('admin', { 
       title: 'Admin Settings',
       fields,
@@ -38,8 +38,12 @@ exports.adminPage = function(req, res, next) {
 exports.createField = ( req, res, next ) =>{
   const field = req.body
   console.log("Creating field: ", field);
-
-  Field.create(field)
+  db.Field.max('order')
+  .then( max_order =>{
+    field.visible=true; //visibile by default
+    field.order = max_order + 1;
+    return db.Field.create(field)
+  })
   .then( field =>{
     res.redirect('/admin');
   })
